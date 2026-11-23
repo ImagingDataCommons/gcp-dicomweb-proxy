@@ -1,5 +1,7 @@
 # gcp-dicomweb-proxy
 
+[![CI](https://github.com/ImagingDataCommons/gcp-dicomweb-proxy/actions/workflows/ci.yml/badge.svg)](https://github.com/ImagingDataCommons/gcp-dicomweb-proxy/actions/workflows/ci.yml)
+
 A read-only, unauthenticated DICOMweb proxy for one Google Cloud Healthcare API DICOM store,
 deployed as a Cloud Run function. It lets anyone, a web viewer for instance, read a store
 without signing in to Google.
