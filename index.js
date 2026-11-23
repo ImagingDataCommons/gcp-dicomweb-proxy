@@ -12,6 +12,7 @@
  */
 
 const https = require('node:https');
+const {pipeline} = require('node:stream');
 const functions = require('@google-cloud/functions-framework');
 const {GoogleAuth} = require('google-auth-library');
 
@@ -123,7 +124,11 @@ async function dicomwebProxy(req, res) {
       res.setHeader(name, value);
     }
     res.status(up.statusCode);
-    up.pipe(res);
+    // Unlike up.pipe(res), pipeline ends the response if the store drops the
+    // connection mid-body; with pipe the client would wait until the function's
+    // timeout. A response cut short this way, or by a client that cancels (viewers
+    // do), is not logged: the client sees the reset, and the two look the same here.
+    pipeline(up, res, () => {});
   });
 
   upstream.on('error', (err) => {

@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "@google-cloud/functions-framework": "^5.0.5",
-    "google-auth-library": "^11.3.3"
+    "google-auth-library": "^11.3.4"
   }
 }

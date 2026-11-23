@@ -84,7 +84,7 @@ const tag = (json, t) => json[t] && json[t].Value && json[t].Value[0];
   check('QIDO series', series.status === 200, `HTTP ${series.status}`);
   const seriesUid = tag(JSON.parse(series.body)[0], '0020000E');
 
-  const instances = await request('GET', `${root}/studies/${study}/series/${seriesUid}/instances?limit=1`, json);
+  const instances = await request('GET', `${root}/studies/${study}/series/${seriesUid}/instances?limit=1&includefield=00080060`, json);
   check('QIDO instances', instances.status === 200, `HTTP ${instances.status}`);
   const first = JSON.parse(instances.body)[0];
   const sop = tag(first, '00080018');
